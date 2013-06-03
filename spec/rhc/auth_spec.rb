@@ -15,7 +15,7 @@ describe RHC::Auth::Basic do
   its(:password){ should be_nil }
   its(:options){ should_not be_nil }
   its(:can_authenticate?){ should be_false }
-  its(:openshift_server){ should == 'openshift.redhat.com' }
+  its(:openshift_server){ should == 'openshift.fiaspdev.org' }
 
   context "with user options" do
     subject{ described_class.new(options) }
@@ -227,7 +227,7 @@ describe RHC::Auth::Token do
   its(:username){ should be_nil }
   its(:options){ should_not be_nil }
   its(:can_authenticate?){ should be_false }
-  its(:openshift_server){ should == 'openshift.redhat.com' }
+  its(:openshift_server){ should == 'openshift.fiaspdev.org' }
 
   context "with user options" do
     its(:username){ should be_nil }
@@ -271,7 +271,7 @@ describe RHC::Auth::Token do
   context "when initialized with a store" do
     subject{ described_class.new(nil, nil, store) }
     let(:store){ mock }
-    before{ store.should_receive(:get).with(nil, 'openshift.redhat.com').and_return(token) }
+    before{ store.should_receive(:get).with(nil, 'openshift.fiaspdev.org').and_return(token) }
     it("should read the token for the user") do
       subject.send(:token).should == token
     end

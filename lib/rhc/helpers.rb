@@ -97,7 +97,7 @@ module RHC
 
     global_option '-d', '--debug', "Turn on debugging", :hide => true
 
-    global_option '--server NAME', String, 'An OpenShift server hostname (default: openshift.redhat.com)'
+    global_option '--server NAME', String, 'An OpenShift server hostname (default: openshift.fiaspdev.org)'
     global_option '-k', '--insecure', "Allow insecure SSL connections.  Potential security risk.", :hide => true
 
     OptionParser.accept(SSLVersion = Class.new){ |s| OpenSSL::SSL::SSLContext::METHODS.find{ |m| m.to_s.downcase == s.downcase } or raise OptionParser::InvalidOption.new(nil, "The provided SSL version '#{s}' is not valid. Supported values: #{OpenSSL::SSL::SSLContext::METHODS.map(&:to_s).map(&:downcase).join(', ')}") }
@@ -127,7 +127,7 @@ module RHC
     end
 
     def openshift_server
-      to_host((options.server rescue nil) || ENV['LIBRA_SERVER'] || "openshift.redhat.com")
+      to_host((options.server rescue nil) || ENV['LIBRA_SERVER'] || "openshift.fiaspdev.org")
     end
     def openshift_online_server?
       openshift_server =~ /openshift.redhat.com$/i
@@ -157,7 +157,7 @@ module RHC
     end
 
     def openshift_rest_endpoint
-      uri = to_uri((options.server rescue nil) || ENV['LIBRA_SERVER'] || "openshift.redhat.com")
+      uri = to_uri((options.server rescue nil) || ENV['LIBRA_SERVER'] || "openshift.fiaspdev.org")
       uri.path = '/broker/rest/api' if uri.path.blank? || uri.path == '/'
       uri
     end

@@ -124,7 +124,7 @@ module RHC
 
       @default_proxy = nil
 
-      @defaults.add('libra_server', 'openshift.redhat.com')
+      @defaults.add('libra_server', 'openshift.fiaspdev.org')
       @env_config.add('libra_server', ENV['LIBRA_SERVER']) if ENV['LIBRA_SERVER']
 
       @opts_config_path = nil

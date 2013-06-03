@@ -80,7 +80,7 @@ module RHC
     end
 
     def openshift_server
-      options.server || config['libra_server'] || "openshift.redhat.com"
+      options.server || config['libra_server'] || "openshift.fiaspdev.org"
     end
 
     def new_client_for_options
@@ -564,7 +564,7 @@ module RHC
 
 In order to fully interact with OpenShift you will need to install and configure a git client if you have not already done so.
 
-Documentation for installing other tools you will need for OpenShift can be found at https://openshift.redhat.com/community/developers/install-the-client-tools
+Documentation for installing other tools you will need for OpenShift can be found at https://openshift.fiaspdev.org/community/developers/install-the-client-tools
 
 We recommend these free applications:
 

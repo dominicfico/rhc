@@ -9,6 +9,6 @@ script: bundle exec rake spec
 notifications:
   email:
     #recipients:
-    #  - dev@lists.openshift.redhat.com
+    #  - dev@lists.openshift.fiaspdev.org
   irc:
     - "irc.freenode.org#openshift-dev"

@@ -60,7 +60,7 @@ end
 
 def set_endpoint
   # Use either the ENV variable, our libra_server, or prod
-  ENV['RHC_SERVER'] ||= (ENV['RHC_DEV'] ? RHC::Config['libra_server'] : 'openshift.redhat.com')
+  ENV['RHC_SERVER'] ||= (ENV['RHC_DEV'] ? RHC::Config['libra_server'] : 'openshift.fiaspdev.org')
   # Format the endpoint properly
   ENV['RHC_ENDPOINT'] ||= "https://%s/broker/rest/api" % ENV['RHC_SERVER']
   $end_point =  ENV['RHC_ENDPOINT']

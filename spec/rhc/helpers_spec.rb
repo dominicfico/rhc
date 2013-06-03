@@ -30,8 +30,8 @@ describe RHC::Helpers do
 
   subject{ MockHelpers.new }
 
-  its(:openshift_server) { should == 'openshift.redhat.com' }
-  its(:openshift_url) { should == 'https://openshift.redhat.com' }
+  its(:openshift_server) { should == 'openshift.fiaspdev.org' }
+  its(:openshift_url) { should == 'https://openshift.fiaspdev.org' }
 
   it("should display slashes"){ subject.system_path('foo/bar').should == 'foo/bar' }
   context "on windows" do

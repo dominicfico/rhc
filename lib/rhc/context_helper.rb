@@ -9,7 +9,7 @@ module RHC
     include RHC::GitHelpers
 
     def server_context
-      ENV['LIBRA_SERVER'] || (!options.clean && config['libra_server']) || "openshift.redhat.com"
+      ENV['LIBRA_SERVER'] || (!options.clean && config['libra_server']) || "openshift.fiaspdev.org"
     end
 
     def app_context

@@ -82,15 +82,15 @@ describe RHC::Config do
     its(:has_local_config?){ should be_false }
     its(:has_opts_config?){ should be_false }
 
-    it "should return openshift.redhat.com for the server" do
-      subject['libra_server'].should == "openshift.redhat.com"
+    it "should return openshift.fiaspdev.org for the server" do
+      subject['libra_server'].should == "openshift.fiaspdev.org"
     end
   end
 
   context "Config values with /etc/openshift/express.conf" do
 
     it "should have only a global config" do
-      ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com", "global@redhat.com")
+      ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org", "global@redhat.com")
       subject.initialize
       subject.has_global_config?.should be_true
       subject.has_local_config?.should be_false
@@ -98,12 +98,12 @@ describe RHC::Config do
     end
 
     it "should get values from the global config" do
-      ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com",
+      ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org",
                                                                      "global@redhat.com",
                                                                      {"random_value" => 12})
       subject.initialize
 
-      subject['libra_server'].should == "global.openshift.redhat.com"
+      subject['libra_server'].should == "global.openshift.fiaspdev.org"
       subject.default_rhlogin.should == "global@redhat.com"
       subject['random_value'].should == "12"
       subject['non_value'].should be_nil
@@ -115,7 +115,7 @@ describe RHC::Config do
                                                                      "global@redhat.com")
       subject.initialize
 
-      subject['libra_server'].should == "openshift.redhat.com"
+      subject['libra_server'].should == "openshift.fiaspdev.org"
       subject.default_rhlogin.should == "global@redhat.com"
     end
   end
@@ -133,10 +133,10 @@ describe RHC::Config do
 
     context "Config values with ~/.openshift/express.conf" do
       it "should have global and local config" do
-        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com",
+        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org",
                                                                        "global@redhat.com")
         ConfigHelper.write_out_config(File.join(ConfigHelper.home_dir,'.openshift', 'express.conf'),
-                                                "local.openshift.redhat.com","local@redhat.com")
+                                                "local.openshift.fiaspdev.org","local@redhat.com")
         stub_config
 
         subject.home_conf_path.should == File.join(ConfigHelper.home_dir, '.openshift')
@@ -147,16 +147,16 @@ describe RHC::Config do
       end
 
       it "should get values from local config" do
-        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com",
+        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org",
                                                                        "global@redhat.com",
                                                                        {"random_value" => "12"})
         ConfigHelper.write_out_config(File.join(ConfigHelper.home_dir,'.openshift', 'express.conf'),
-                                                "local.openshift.redhat.com",
+                                                "local.openshift.fiaspdev.org",
                                                 "local@redhat.com",
                                                 {"random_value" => 11})
         stub_config
 
-        subject['libra_server'].should == "local.openshift.redhat.com"
+        subject['libra_server'].should == "local.openshift.fiaspdev.org"
         subject.default_rhlogin.should == "local@redhat.com"
         subject['random_value'].should == "11"
         subject['non_value'].should be_nil
@@ -171,7 +171,7 @@ describe RHC::Config do
                                                 {"random_value" => 11})
         stub_config
 
-        subject['libra_server'].should == "openshift.redhat.com"
+        subject['libra_server'].should == "openshift.fiaspdev.org"
         subject.default_rhlogin.should == "global@redhat.com"
         subject['random_value'].should == "11"
       end
@@ -179,19 +179,19 @@ describe RHC::Config do
 
     context "Config values with LIBRA_SERVER ENV set" do
       it "should get values from local config" do
-        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com",
+        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org",
                                                                        "global@redhat.com",
                                                                        {"random_value" => "12"})
         ConfigHelper.write_out_config(File.join(ConfigHelper.home_dir,'.openshift', 'express.conf'),
-                                                "local.openshift.redhat.com",
+                                                "local.openshift.fiaspdev.org",
                                                 "local@redhat.com",
                                                 {"random_value" => 11})
-        ENV['LIBRA_SERVER'] = "env.openshift.redhat.com"
+        ENV['LIBRA_SERVER'] = "env.openshift.fiaspdev.org"
 
         stub_config
         subject.set_local_config(File.join(ConfigHelper.home_dir,'.openshift', 'express.conf'))
 
-        subject['libra_server'].should == "env.openshift.redhat.com"
+        subject['libra_server'].should == "env.openshift.fiaspdev.org"
         subject.default_rhlogin.should == "local@redhat.com"
         subject['random_value'].should == "11"
         subject['non_value'].should be_nil
@@ -200,12 +200,12 @@ describe RHC::Config do
 
     context "Config values with options set" do
       it "should have global and local config" do
-        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com",
+        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org",
                                                                        "global@redhat.com")
         ConfigHelper.write_out_config(File.join(ConfigHelper.home_dir,'.openshift', 'express.conf'),
-                                                "local.openshift.redhat.com","local@redhat.com")
+                                                "local.openshift.fiaspdev.org","local@redhat.com")
         ConfigHelper.write_out_config(ConfigHelper.opts_config_path,
-                                      "opts.openshift.redhat.com",
+                                      "opts.openshift.fiaspdev.org",
                                       "opts@redhat.com")
         stub_config
         subject.check_cpath({"config" => ConfigHelper.opts_config_path,
@@ -217,22 +217,22 @@ describe RHC::Config do
       end
 
       it "should get values from local config" do
-        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.redhat.com",
+        ConfigHelper.write_out_config(ConfigHelper.global_config_path, "global.openshift.fiaspdev.org",
                                                                        "global@redhat.com",
                                                                        {"random_value" => "12"})
         ConfigHelper.write_out_config(File.join(ConfigHelper.home_dir,'.openshift', 'express.conf'),
-                                                "local.openshift.redhat.com",
+                                                "local.openshift.fiaspdev.org",
                                                 "local@redhat.com",
                                                 {"random_value" => 11})
         ConfigHelper.write_out_config(ConfigHelper.opts_config_path,
-                                      "opts.openshift.redhat.com",
+                                      "opts.openshift.fiaspdev.org",
                                       "opts@redhat.com",
                                       {"random_value" => 10})
         stub_config
         subject.check_cpath({"config" => ConfigHelper.opts_config_path,
                                  "random_val" => "ok"})
 
-        subject['libra_server'].should == "opts.openshift.redhat.com"
+        subject['libra_server'].should == "opts.openshift.fiaspdev.org"
         subject.default_rhlogin.should == "opts@redhat.com"
         subject['random_value'].should == "10"
         subject['non_value'].should be_nil
@@ -254,7 +254,7 @@ describe RHC::Config do
         subject.check_cpath({"config" => ConfigHelper.opts_config_path,
                                  "random_val" => "ok"})
 
-        subject['libra_server'].should == "openshift.redhat.com"
+        subject['libra_server'].should == "openshift.fiaspdev.org"
         subject.default_rhlogin.should == "global@redhat.com"
         subject['random_value'].should == "10"
         subject['local_value'].should == "local"
@@ -349,7 +349,7 @@ describe RHC::Config do
   context "Configuration file parsing" do
     it "should exit if config file can't be read" do
       ConfigHelper.write_out_config(ConfigHelper.global_config_path,
-                                    "global.openshift.redhat.com",
+                                    "global.openshift.fiaspdev.org",
                                     "global@redhat.com")
       subject.initialize
       RHC::Vendor::ParseConfig.stub(:new) { raise Errno::EACCES.new("Fake can't read file") }
@@ -359,7 +359,7 @@ describe RHC::Config do
 
       # write out config file so it exists but is not readable
       ConfigHelper.write_out_config("fake.conf",
-                                    "global.openshift.redhat.com",
+                                    "global.openshift.fiaspdev.org",
                                     "global@redhat.com")
 
       expect { subject.read_config_files }.to raise_error(Errno::EACCES)

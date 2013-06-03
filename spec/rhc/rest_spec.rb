@@ -297,7 +297,7 @@ module RHC
 
       if HTTPClient::SSLConfig.method_defined? :ssl_version
         context "when an invalid ssl version is passed, OpenSSL should reject us" do
-          let(:request){ {:url => "https://openshift.redhat.com", :method => :get, :ssl_version => :SSLv3_server} }
+          let(:request){ {:url => "https://openshift.fiaspdev.org", :method => :get, :ssl_version => :SSLv3_server} }
           before{ WebMock.allow_net_connect! }
           it("fails to call openssl"){ response.should raise_error(RHC::Rest::SSLConnectionFailed, /called a function you should not call/) }
           after{ WebMock.disable_net_connect! }

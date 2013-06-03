@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version      = spec_file.match(/^Version:\s*(.*?)$/mi)[1].chomp
 
   s.authors      = %q{Red Hat}
-  s.email        = %q{dev@lists.openshift.redhat.com}
+  s.email        = %q{dev@lists.openshift.fiaspdev.org}
   s.summary      = %q{OpenShift Client Tools}
   s.homepage     = %q{https://github.com/openshift/rhc}
   s.description  = %q{The client tools for the OpenShift platform that allow for application management.}
